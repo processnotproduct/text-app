@@ -1,3 +1,5 @@
+/* Text.app window style */
+
 body[theme="light"] header {
   background-color: #F5F5F5;
 }
@@ -22,11 +24,13 @@ body[theme="light"] #sidebar li:hover {
 
 body[theme="light"] #settings-list input[type="text"] {
   background-color: #ddd;
+  color: #555;
 }
 
 body[theme="light"] #settings-list input[type="text"]:focus {
   border: 1px solid #242424;
   outline: none;
+  color: #555;
 }
 
 body[theme="light"] #settings-list input[type="checkbox"] {
@@ -34,10 +38,22 @@ body[theme="light"] #settings-list input[type="checkbox"] {
 }
 
 body[theme="light"] #settings-list select {
+  -webkit-app-region: no-drag;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #888;
+  border-radius: 1px;
+  font-size: 14px;
+  color: #555;
+  line-height: 18px;
+  margin: 0;
+  padding: 0 0 0 23px;
+  -webkit-user-select: auto;
+  width: 110px;
   background: url('../images/menu.svg')no-repeat 75px center #ddd;
-  background-size: 18px 18px;
-  background-position-x: 70px;
+  background-size: 16px;
+  background-position-x: 5px;
   -webkit-appearance: none;
+  cursor: pointer;
 }
 
 body[theme="light"] #settings-list select:focus {
@@ -65,6 +81,8 @@ body[theme="light"] #tabs-list li:hover .close {
 body[theme="light"] #tabs-list li .close:hover {
   opacity: 1;
 }
+
+/* Ace style */
 
 .ace-text-light.hide-line-numbers .ace_gutter {
   display: none;
@@ -165,4 +183,32 @@ body[theme="light"] #tabs-list li .close:hover {
 
 .ace-text-light .ace_markup.ace_underline {
   text-decoration:underline;
+}
+
+/* Based on CodeMirror eclipse theme */
+
+.cm-s-light span.cm-meta {color: #FF1717;}
+.cm-s-light span.cm-keyword { line-height: 1em; font-weight: bold; color: #7F0055; }
+.cm-s-light span.cm-atom {color: #219;}
+.cm-s-light span.cm-number {color: #164;}
+.cm-s-light span.cm-def {color: #00f;}
+.cm-s-light span.cm-variable {color: black;}
+.cm-s-light span.cm-variable-2 {color: #0000C0;}
+.cm-s-light span.cm-variable-3 {color: #0000C0;}
+.cm-s-light span.cm-property {color: black;}
+.cm-s-light span.cm-operator {color: black;}
+.cm-s-light span.cm-comment {color: #3F7F5F;}
+.cm-s-light span.cm-string {color: #2A00FF;}
+.cm-s-light span.cm-string-2 {color: #f50;}
+.cm-s-light span.cm-error {color: #f00;}
+.cm-s-light span.cm-qualifier {color: #555;}
+.cm-s-light span.cm-builtin {color: #30a;}
+.cm-s-light span.cm-bracket {color: #cc7;}
+.cm-s-light span.cm-tag {color: #170;}
+.cm-s-light span.cm-attribute {color: #00c;}
+.cm-s-light span.cm-link {color: #219;}
+
+.cm-s-light .CodeMirror-matchingbracket {
+  outline:1px solid grey;
+    color:black !important;
 }
