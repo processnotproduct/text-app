@@ -29,54 +29,16 @@ FILES = [
   'icon/96x96.png',
   'icon/128x128.png',
   'icon/256x256.png',
+  'images/check_no_box.png',
   'images/check_no_box_white.png',
   'images/close.svg',
   'images/close-tab.svg',
   'images/maximize.svg',
   'images/menu.svg',
   'images/search.svg',
-  'lib/jquery-1.8.3.min.js',
-  'lib/ace/src-min-noconflict/ace.js',
-  'lib/ace/src-min-noconflict/mode-c_cpp.js',
-  'lib/ace/src-min-noconflict/mode-clojure.js',
-  'lib/ace/src-min-noconflict/mode-coffee.js',
-  'lib/ace/src-min-noconflict/mode-coldfusion.js',
-  'lib/ace/src-min-noconflict/mode-csharp.js',
-  'lib/ace/src-min-noconflict/mode-css.js',
-  'lib/ace/src-min-noconflict/mode-diff.js',
-  'lib/ace/src-min-noconflict/mode-golang.js',
-  'lib/ace/src-min-noconflict/mode-groovy.js',
-  'lib/ace/src-min-noconflict/mode-haxe.js',
-  'lib/ace/src-min-noconflict/mode-html.js',
-  'lib/ace/src-min-noconflict/mode-java.js',
-  'lib/ace/src-min-noconflict/mode-javascript.js',
-  'lib/ace/src-min-noconflict/mode-json.js',
-  'lib/ace/src-min-noconflict/mode-jsx.js',
-  'lib/ace/src-min-noconflict/mode-latex.js',
-  'lib/ace/src-min-noconflict/mode-less.js',
-  'lib/ace/src-min-noconflict/mode-liquid.js',
-  'lib/ace/src-min-noconflict/mode-lua.js',
-  'lib/ace/src-min-noconflict/mode-luapage.js',
-  'lib/ace/src-min-noconflict/mode-markdown.js',
-  'lib/ace/src-min-noconflict/mode-ocaml.js',
-  'lib/ace/src-min-noconflict/mode-perl.js',
-  'lib/ace/src-min-noconflict/mode-pgsql.js',
-  'lib/ace/src-min-noconflict/mode-php.js',
-  'lib/ace/src-min-noconflict/mode-powershell.js',
-  'lib/ace/src-min-noconflict/mode-python.js',
-  'lib/ace/src-min-noconflict/mode-ruby.js',
-  'lib/ace/src-min-noconflict/mode-scad.js',
-  'lib/ace/src-min-noconflict/mode-scala.js',
-  'lib/ace/src-min-noconflict/mode-scss.js',
-  'lib/ace/src-min-noconflict/mode-sh.js',
-  'lib/ace/src-min-noconflict/mode-sql.js',
-  'lib/ace/src-min-noconflict/mode-svg.js',
-  'lib/ace/src-min-noconflict/mode-textile.js',
-  'lib/ace/src-min-noconflict/mode-text.js',
-  'lib/ace/src-min-noconflict/mode-xml.js',
-  'lib/ace/src-min-noconflict/mode-xquery.js',
-  'lib/ace/src-min-noconflict/mode-yaml.js'
-]
+  'lib/CodeMirror/lib/codemirror.css',
+  'lib/jquery-1.8.3.min.js'
+ ]
 
 MANIFEST = 'manifest.json'
 INDEX_HTML = 'index.html'
@@ -258,8 +220,6 @@ def compile_js(out_path, js_files, level, externs):
 
 def main():
   parse_command_line()
-  print(debug_build)
-
   version = get_version()
 
   dir_name = APP_NAME + '-' + version

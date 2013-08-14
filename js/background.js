@@ -54,13 +54,19 @@ Background.prototype.launch = function(launchData) {
     }
   }
 
-  if (entries.length > 0 && this.windows_.length > 0) {
-    console.log('Opening files in existing window.');
-    this.windows_[0].openEntries(entries);
-  } else {
-    this.entriesToOpen_.push.apply(this.entriesToOpen_, entries);
-    console.log('Files to open:', this.entriesToOpen_);
+  if (this.windows_.length == 0)
     this.newWindow();
+
+  for (var i = 0; i < entries.length; i++) {
+    chrome.fileSystem.getWritableEntry(
+        entries[i],
+        function(entry) {
+          if (this.windows_.length > 0) {
+            this.windows_[0].openEntries([entry]);
+          } else {
+            this.entriesToOpen_.push(entry);
+          }
+        }.bind(this));
   }
 };
 
@@ -70,12 +76,12 @@ Background.prototype.launch = function(launchData) {
  */
 Background.prototype.onWindowClosed = function(win) {
   console.log('Window closed:', win);
-  if (!win.contentWindow || !win.contentWindow.textDrive) {
-    console.warn('No TextDrive object in the window being closed:',
-                 win.contentWindow, win.contentWindow.textDrive);
+  if (!win.contentWindow || !win.contentWindow.textApp) {
+    console.warn('No Text.app object in the window being closed:',
+                 win.contentWindow, win.contentWindow.textApp);
     return;
   }
-  var td = win.contentWindow.textDrive;
+  var td = win.contentWindow.textApp;
   for (var i = 0; i < this.windows_.length; i++) {
     if (td === this.windows_[i]) {
       this.windows_.splice(i, 1);
@@ -101,8 +107,8 @@ Background.prototype.saveFile_ = function(entry, contents) {
 };
 
 /**
- * @param {TextDrive} td
- * Called by the TextDrive object in the window when the window is ready.
+ * @param {TextApp} td
+ * Called by the TextApp object in the window when the window is ready.
  */
 Background.prototype.onWindowReady = function(td) {
   this.windows_.push(td);

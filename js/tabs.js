@@ -1,7 +1,7 @@
 /**
  * @constructor
  * @param {number} id
- * @param {EditSession} session Ace edit session.
+ * @param {EditSession} session Edit session.
  * @param {FileEntry} entry
  */
 function Tab(id, session, entry) {
@@ -61,26 +61,8 @@ Tab.prototype.getEntry = function() {
   return this.entry_;
 };
 
-Tab.prototype.getContents = function() {
-  return this.session_.getValue();
-};
-
 Tab.prototype.getPath = function() {
   return this.path_;
-};
-
-/**
- * @param {number} tabSize
- */
-Tab.prototype.setTabSize = function(tabSize) {
-  this.session_.setTabSize(tabSize);
-};
-
-/**
- * @param {boolean} wrapLines
- */
-Tab.prototype.setWrapping = function(wrapLines) {
-  this.session_.setUseWrapMode(wrapLines);
 };
 
 Tab.prototype.updatePath_ = function() {
@@ -168,13 +150,13 @@ Tabs.prototype.newTab = function(opt_content, opt_entry) {
   var session = this.editor_.newSession(opt_content);
 
   var tab = new Tab(id, session, opt_entry || null);
-  tab.setTabSize(this.settings_.get('tabsize'));
-  var fileNameExtension = tab.getExtension();
-  if (fileNameExtension)
-    this.editor_.setMode(session, fileNameExtension);
+  this.editor_.setTabSize(tab.getSession(), this.settings_.get('tabsize'));
   this.tabs_.push(tab);
   $.event.trigger('newtab', tab);
   this.showTab(tab.getId());
+  var fileNameExtension = tab.getExtension();
+  if (fileNameExtension)
+    this.editor_.setMode(session, fileNameExtension);
 };
 
 Tabs.prototype.nextTab = function() {
@@ -300,7 +282,7 @@ Tabs.prototype.getFilesToSave = function() {
   for (i = 0; i < this.tabs_.length; i++) {
     if (!this.tabs_[i].isSaved() && this.tabs_[i].getEntry()) {
       toSave.push({'entry': this.tabs_[i].getEntry(),
-                   'contents': this.tabs_[i].getContents()});
+                   'contents': editor.getContents(this.tabs_[i].getSession())});
     }
   }
 
@@ -386,12 +368,6 @@ Tabs.prototype.onSettingsChanged_ = function(e, key, value) {
       }
       for (i = 0; i < this.tabs_.length; i++) {
         this.tabs_[i].setTabSize(value);
-      }
-      break;
-
-    case 'wraplines':
-      for (i = 0; i < this.tabs_.length; i++) {
-        this.tabs_[i].setWrapping(value);
       }
       break;
   }
